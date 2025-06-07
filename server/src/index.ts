@@ -94,6 +94,7 @@ app.get('/health', (req: Request, res: Response) => {
 
 // For Vercel serverless functions
 export default app;
+module.exports = app;
 
 // For local development
 if (process.env.NODE_ENV !== 'production') {
