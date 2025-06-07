@@ -1,13 +1,26 @@
 import { Location, CreateLocationRequest } from '../types/location';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || (
-  import.meta.env.PROD ? '' : 'http://localhost:3001'
-);
+// Force relative URLs for production - debugging approach
+const API_BASE_URL = (() => {
+  // If explicitly set, use that
+  if (import.meta.env.VITE_API_BASE_URL) {
+    return import.meta.env.VITE_API_BASE_URL;
+  }
+  
+  // Check if we're on localhost
+  if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+    return 'http://localhost:3001';
+  }
+  
+  // Default to relative URLs for production
+  return '';
+})();
 
 console.log('Environment check:', {
   VITE_API_BASE_URL: import.meta.env.VITE_API_BASE_URL,
   PROD: import.meta.env.PROD,
   MODE: import.meta.env.MODE,
+  DEV: import.meta.env.DEV,
   API_BASE_URL
 });
 
