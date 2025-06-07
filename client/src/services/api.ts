@@ -4,6 +4,13 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || (
   import.meta.env.PROD ? '' : 'http://localhost:3001'
 );
 
+console.log('Environment check:', {
+  VITE_API_BASE_URL: import.meta.env.VITE_API_BASE_URL,
+  PROD: import.meta.env.PROD,
+  MODE: import.meta.env.MODE,
+  API_BASE_URL
+});
+
 export const api = {
   async getLocations(): Promise<Location[]> {
     const response = await fetch(`${API_BASE_URL}/api/locations`);
