@@ -94,3 +94,4 @@ temp/
 
 # Local env files
 .env*.local
+.vercel

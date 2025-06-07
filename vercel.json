@@ -9,7 +9,10 @@
     },
     {
       "src": "server/src/index.ts",
-      "use": "@vercel/node"
+      "use": "@vercel/node",
+      "config": {
+        "maxLambdaSize": "10mb"
+      }
     }
   ],
   "routes": [
@@ -21,10 +24,5 @@
       "src": "/(.*)",
       "dest": "/client/dist/$1"
     }
-  ],
-  "functions": {
-    "server/src/index.ts": {
-      "maxDuration": 30
-    }
-  }
+  ]
 }
