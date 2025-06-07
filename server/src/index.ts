@@ -8,8 +8,21 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-app.use(cors());
+app.use(cors({
+  origin: true,
+  credentials: true,
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
+
+// Handle preflight requests
+app.options('*', (req, res) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.sendStatus(200);
+});
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -41,14 +54,16 @@ interface CreateLocationRequest {
 
 app.get('/api/locations', async (req: Request, res: Response) => {
   try {
+    console.log('Fetching locations...');
     const result = await pool.query(
       'SELECT * FROM locations WHERE status = $1 ORDER BY created_at DESC',
       ['approved']
     );
+    console.log(`Found ${result.rows.length} locations`);
     res.json(result.rows);
   } catch (err) {
     console.error('Error fetching locations:', err);
-    res.status(500).json({ error: 'Failed to fetch locations' });
+    res.status(500).json({ error: 'Failed to fetch locations', details: err instanceof Error ? err.message : 'Unknown error' });
   }
 });
 
