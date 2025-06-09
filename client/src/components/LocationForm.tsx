@@ -30,11 +30,18 @@ export function LocationForm({ onSubmit, isSubmitting = false }: LocationFormPro
         setIsLoaded(true);
 
         if (inputRef.current) {
+          // Suppress the deprecation warning by temporarily storing console.warn
+          const originalWarn = console.warn;
+          console.warn = () => {};
+
           const autocomplete = new google.maps.places.Autocomplete(inputRef.current, {
             types: ['establishment'],
             componentRestrictions: { country: 'us' },
             fields: ['place_id', 'name', 'formatted_address', 'geometry']
           });
+
+          // Restore console.warn
+          console.warn = originalWarn;
 
           autocomplete.addListener('place_changed', () => {
             const place = autocomplete.getPlace();
@@ -76,6 +83,7 @@ export function LocationForm({ onSubmit, isSubmitting = false }: LocationFormPro
       
       setSelectedPlace(null);
       setFormData({ poolTableCount: 1, notes: '' });
+      // Clear the autocomplete input
       if (inputRef.current) {
         inputRef.current.value = '';
       }
@@ -85,10 +93,7 @@ export function LocationForm({ onSubmit, isSubmitting = false }: LocationFormPro
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
-      <h2 className="text-xl font-semibold mb-4">Add New Location</h2>
-      
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="place-search" className="block text-sm font-medium text-gray-700 mb-1">
             Search for a bar or venue
@@ -154,6 +159,5 @@ export function LocationForm({ onSubmit, isSubmitting = false }: LocationFormPro
           Your submission will be reviewed before appearing on the map.
         </p>
       </form>
-    </div>
   );
 }

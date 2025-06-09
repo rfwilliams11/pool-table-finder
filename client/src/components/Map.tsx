@@ -4,12 +4,11 @@ import { Location } from '../types/location';
 
 interface MapProps {
   locations: Location[];
-  onLocationSelect?: (location: Location) => void;
 }
 
 const SF_CENTER = { lat: 37.7749, lng: -122.4194 };
 
-export function Map({ locations, onLocationSelect }: MapProps) {
+export function Map({ locations }: MapProps) {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<google.maps.Map | null>(null);
   const markersRef = useRef<google.maps.Marker[]>([]);
@@ -94,7 +93,6 @@ export function Map({ locations, onLocationSelect }: MapProps) {
 
         marker.addListener('click', () => {
           infoWindow.open(mapInstanceRef.current, marker);
-          onLocationSelect?.(location);
         });
 
         markersRef.current.push(marker);
@@ -109,7 +107,7 @@ export function Map({ locations, onLocationSelect }: MapProps) {
     return () => {
       google.maps.event.removeListener(zoomListener);
     };
-  }, [locations, isLoaded, onLocationSelect]);
+  }, [locations, isLoaded]);
 
   if (error) {
     return (

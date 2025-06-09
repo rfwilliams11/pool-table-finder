@@ -87,7 +87,54 @@ body {
 .block { display: block; }
 .relative { position: relative; }
 .absolute { position: absolute; }
+.fixed { position: fixed; }
 .inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+
+/* Z-index utilities */
+.z-50 { z-index: 50; }
+
+/* Modal utilities */
+.overflow-y-auto { overflow-y: auto; }
+.overflow-hidden { overflow: hidden; }
+
+/* Flexbox utilities */
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.min-h-screen { min-height: 100vh; }
+
+/* Spacing utilities */
+.px-4 { padding-left: 1rem; padding-right: 1rem; }
+.pt-4 { padding-top: 1rem; }
+.pb-20 { padding-bottom: 5rem; }
+
+/* Background utilities */
+.bg-gray-500 { background-color: #6b7280; }
+.bg-opacity-75 { background-color: rgba(107, 114, 128, 0.75); }
+
+/* Inline block */
+.inline-block { display: inline-block; }
+.align-bottom { vertical-align: bottom; }
+
+/* Transform and transition */
+.transform { transform: var(--tw-transform); }
+.transition-opacity { transition-property: opacity; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+.transition-all { transition-property: all; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+
+/* Shadow utilities */
+.shadow-xl { box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04); }
+
+/* Text utilities */
+.text-left { text-align: left; }
+
+/* Additional utilities for modal */
+.h-6 { height: 1.5rem; }
+.w-6 { width: 1.5rem; }
+.text-gray-400 { color: #9ca3af; }
+.hover\\:text-gray-600:hover { color: #4b5563; }
+.focus\\:text-gray-600:focus { color: #4b5563; }
+
+/* Screen reader only */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0; }
 
 .cursor-not-allowed { cursor: not-allowed; }
 
@@ -102,6 +149,10 @@ body {
 .focus\\:ring-blue-500:focus { --tw-ring-color: #3b82f6; }
 .focus\\:ring-offset-2:focus { --tw-ring-offset-width: 2px; }
 .focus\\:border-blue-500:focus { border-color: #3b82f6; }
+
+.focus-within\\:ring-2:focus-within { --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color); --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color); box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000); }
+.focus-within\\:ring-blue-500:focus-within { --tw-ring-color: #3b82f6; }
+.focus-within\\:border-blue-500:focus-within { border-color: #3b82f6; }
 
 .hover\\:bg-blue-700:hover { background-color: #1d4ed8; }
 .hover\\:text-blue-700:hover { color: #1d4ed8; }
@@ -122,6 +173,42 @@ body {
 }
 
 /* Responsive */
+@media (min-width: 640px) {
+  .sm\\:block { display: block; }
+  .sm\\:p-0 { padding: 0; }
+  .sm\\:my-8 { margin-top: 2rem; margin-bottom: 2rem; }
+  .sm\\:align-middle { vertical-align: middle; }
+  .sm\\:max-w-lg { max-width: 32rem; }
+  .sm\\:w-full { width: 100%; }
+  .sm\\:p-6 { padding: 1.5rem; }
+}
+
+/* Animation for toast */
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Additional toast utilities */
+.top-4 { top: 1rem; }
+.right-4 { right: 1rem; }
+.max-w-sm { max-width: 24rem; }
+.gap-3 { gap: 0.75rem; }
+.flex-1 { flex: 1 1 0%; }
+.bg-green-500 { background-color: #10b981; }
+.bg-red-500 { background-color: #ef4444; }
+.w-4 { width: 1rem; }
+.h-4 { height: 1rem; }
+.hover\\:text-gray-200:hover { color: #e5e7eb; }
+.transition-colors { transition-property: color; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+.shadow-lg { box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
+.px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+.py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+
 @media (min-width: 1024px) {
   .lg\\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .lg\\:col-span-2 { grid-column: span 2 / span 2; }
